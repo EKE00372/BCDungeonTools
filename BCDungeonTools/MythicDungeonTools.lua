@@ -39,6 +39,7 @@ local LDB = LibStub("LibDataBroker-1.1"):NewDataObject("MythicDungeonTools", {
 		tooltip:AddLine(L["Right-click to lock Minimap Button"])
 	end,
 })
+local LDD = LibStub("LibUIDropDownMenu-4.0")
 
 SLASH_MYTHICDUNGEONTOOLS1 = "/mplus"
 SLASH_MYTHICDUNGEONTOOLS2 = "/mdt"
@@ -3741,7 +3742,7 @@ function MDT:MakePullSelectionButtons(frame)
 
     frame.newPullButtons = {}
 	--rightclick context menu
-    frame.optionsDropDown = L_Create_UIDropDownMenu("PullButtonsOptionsDropDown", nil)
+    frame.optionsDropDown = LDD:Create_UIDropDownMenu("PullButtonsOptionsDropDown", nil)
 end
 
 
@@ -5013,7 +5014,7 @@ function initFrames()
 	-- Set frame position
 	main_frame:ClearAllPoints()
 	main_frame:SetPoint(db.anchorTo, UIParent,db.anchorFrom, db.xoffset, db.yoffset)
-    main_frame.contextDropdown = L_Create_UIDropDownMenu("MDTContextDropDown", nil)
+    main_frame.contextDropdown = LDD:Create_UIDropDownMenu("MDTContextDropDown", nil)
 
     MDT:CheckCurrentZone(true)
     MDT:EnsureDBTables()

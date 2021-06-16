@@ -9,6 +9,7 @@ local currentTool
 local objectDrawLayer = "OVERLAY"
 
 local twipe,tinsert,tremove,tgetn,CreateFrame,tonumber,pi,max,min,atan2,abs,pairs,ipairs,GetCursorPosition,GameTooltip = table.wipe,table.insert,table.remove,table.getn,CreateFrame,tonumber,math.pi,math.max,math.min,math.atan2,math.abs,pairs,ipairs,GetCursorPosition,GameTooltip
+local LDD = LibStub("LibUIDropDownMenu-4.0")
 
 ---sets up the toolbar frame and the widgets in it
 function MDT:initToolbar(frame)
@@ -1030,7 +1031,7 @@ local function makeNoteEditbox()
     return editbox
 end
 
-local noteDropDown = L_Create_UIDropDownMenu("noteDropDown", nil)
+local noteDropDown = LDD:Create_UIDropDownMenu("noteDropDown", nil)
 local currentNote
 local noteMenu = {}
 do

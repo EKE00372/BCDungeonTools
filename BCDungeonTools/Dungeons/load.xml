@@ -1,0 +1,26 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	
+	<Script file='SlavePens.lua'/>
+	<Script file='Underbog.lua'/>
+	<Script file='Steamvault.lua'/>
+	<Script file='Botanica.lua'/>
+	<Script file='Arcatraz.lua'/>
+	<Script file='Mechanar.lua'/>
+	
+<!--
+	
+	<Script file='HellfireRamparts.lua'/>
+	<Script file='BloodFurnace.lua'/>
+	<Script file='ShatteredHalls.lua'/>
+	<Script file='SethekkHalls.lua'/>
+	<Script file='AuchenaiCrypts.lua'/>
+	<Script file='ShadowLabyrinth.lua'/>
+	<Script file='ManaTombs.lua'/>
+
+	
+	<Script file='BlackMorass.lua'/>
+	<Script file='OldHillsbradFoothills.lua'/>
+	<Script file='MagistersTerrace.lua'/>
+	
+-->
+</Ui>

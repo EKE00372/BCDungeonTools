@@ -230,22 +230,6 @@ local function MakeEnemeyInfoFrame()
         end)
         f.enemyDataContainer:AddChild(f.enemyDataContainer.levelEditBox)
 
-        f.enemyDataContainer.countEditBox = AceGUI:Create("EditBox")
-        f.enemyDataContainer.countEditBox:SetLabel(L["Enemy Info NPC Enemy Forces"])
-        f.enemyDataContainer.countEditBox:DisableButton(true)
-        f.enemyDataContainer.countEditBox:SetCallback("OnTextChanged", function(self)
-            self:SetText(self.defaultText)
-        end)
-        f.enemyDataContainer:AddChild(f.enemyDataContainer.countEditBox)
-
-        f.enemyDataContainer.teemingCountEditBox = AceGUI:Create("EditBox")
-        f.enemyDataContainer.teemingCountEditBox:SetLabel(L["Enemy Info NPC Enemy Forces (Teeming)"])
-        f.enemyDataContainer.teemingCountEditBox:DisableButton(true)
-        f.enemyDataContainer.teemingCountEditBox:SetCallback("OnTextChanged", function(self)
-            self:SetText(self.defaultText)
-        end)
-        f.enemyDataContainer:AddChild(f.enemyDataContainer.teemingCountEditBox)
-
         f.enemyDataContainer.stealthCheckBox = AceGUI:Create("CheckBox")
         f.enemyDataContainer.stealthCheckBox:SetLabel(L["Enemy Info NPC Stealth"])
         f.enemyDataContainer.stealthCheckBox:SetWidth((f.enemyDataContainer.frame:GetWidth()/2)-40)
@@ -445,7 +429,7 @@ function MDT:UpdateEnemyInfoFrame(enemyIdx)
     local f = MDT.EnemyInfoFrame
     f:SetTitle(L[data.name])
     f.model:SetDisplayInfo(data.displayId or 39490)
-    f.model:ResetModel()
+    --f.model:ResetModel()
 
     local container = f.tabGroup
     ---rescaling
@@ -544,7 +528,7 @@ function MDT:UpdateEnemyInfoData(enemyIdx)
     f.enemyDataContainer.creatureTypeEditBox.defaultText = data.creatureType
     f.enemyDataContainer.levelEditBox:SetText(data.level)
     f.enemyDataContainer.levelEditBox.defaultText = data.level
-    f.enemyDataContainer.countEditBox:SetText(data.count)
+    --[[f.enemyDataContainer.countEditBox:SetText(data.count)
     f.enemyDataContainer.countEditBox.defaultText = data.count
     if not data.teemingCount then
         f.enemyDataContainer.teemingCountEditBox.frame:Hide()
@@ -552,7 +536,7 @@ function MDT:UpdateEnemyInfoData(enemyIdx)
         f.enemyDataContainer.teemingCountEditBox.frame:Show()
         f.enemyDataContainer.teemingCountEditBox:SetText(data.teemingCount)
         f.enemyDataContainer.teemingCountEditBox.defaultText = data.teemingCount
-    end
+    end]]--
     f.enemyDataContainer.stealthCheckBox:SetValue(data.stealth)
     f.enemyDataContainer.stealthCheckBox.defaultValue = data.stealth
     f.enemyDataContainer.stealthDetectCheckBox:SetValue(data.stealthDetect)

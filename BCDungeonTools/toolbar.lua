@@ -2,6 +2,7 @@ local MDT = MDT
 local L = MDT.L
 local sizex,sizey = 350,33
 local AceGUI = LibStub("AceGUI-3.0")
+local LDD = LibStub("LibUIDropDownMenu-4.0")
 local db
 local toolbarTools = {}
 local drawingActive = false
@@ -9,7 +10,6 @@ local currentTool
 local objectDrawLayer = "OVERLAY"
 
 local twipe,tinsert,tremove,tgetn,CreateFrame,tonumber,pi,max,min,atan2,abs,pairs,ipairs,GetCursorPosition,GameTooltip = table.wipe,table.insert,table.remove,table.getn,CreateFrame,tonumber,math.pi,math.max,math.min,math.atan2,math.abs,pairs,ipairs,GetCursorPosition,GameTooltip
-local LDD = LibStub("LibUIDropDownMenu-4.0")
 
 ---sets up the toolbar frame and the widgets in it
 function MDT:initToolbar(frame)
@@ -1070,6 +1070,21 @@ do
     })
 end
 
+--- compatible QuestPOI
+local QUEST_POI_COLOR_YELLOW = 0.5;
+local QUEST_POI_COLOR_BLACK = 0;
+local QUEST_POI_ICONS_PER_ROW = 8;
+local QUEST_POI_ICON_SIZE = 0.125;
+local function QuestPOI_CalculateNumericTexCoords(index, color)
+	if index then
+		color = color or QUEST_POI_COLOR_YELLOW;
+		local iconIndex = index - 1;
+		local yOffset = color + floor(iconIndex / QUEST_POI_ICONS_PER_ROW) * QUEST_POI_ICON_SIZE;
+		local xOffset = mod(iconIndex, QUEST_POI_ICONS_PER_ROW) * QUEST_POI_ICON_SIZE;
+		return xOffset, xOffset + QUEST_POI_ICON_SIZE, yOffset, yOffset + QUEST_POI_ICON_SIZE;
+	end
+end
+
 ---DrawNote
 function MDT:DrawNote(x, y, text, objectIndex)
     if not notePoolCollection then
@@ -1084,19 +1099,19 @@ function MDT:DrawNote(x, y, text, objectIndex)
     note:ClearAllPoints()
     note:SetPoint("CENTER", MDT.main_frame.mapPanelTile1,"TOPLEFT",x,y)
     note:SetSize(12*scale,12*scale)
-    note.NormalTexture:SetSize(15*scale, 15*scale)
+    note.Texture:SetSize(15*scale, 15*scale)
     note.PushedTexture:SetSize(15*scale, 15*scale)
-    note.HighlightTexture:SetSize(15*scale, 15*scale)
-    note.Display.Icon:SetSize(16*scale, 16*scale)
-    note.NormalTexture:SetTexture("Interface/WorldMap/UI-QuestPoi-NumberIcons")
+    note.Highlight:SetSize(15*scale, 15*scale)
+    note.Number:SetSize(16*scale, 16*scale)
+    note.Texture:SetTexture("Interface/WorldMap/UI-QuestPoi-NumberIcons")
     note.PushedTexture:SetTexture("Interface/WorldMap/UI-QuestPoi-NumberIcons")
-    note.HighlightTexture:SetTexture("Interface/WorldMap/UI-QuestPoi-NumberIcons")
-    note.Display.Icon:SetTexture("Interface/WorldMap/UI-QuestPoi-NumberIcons")
-    note.NormalTexture:SetTexCoord(0.500, 0.625, 0.375, 0.5)
+    note.Highlight:SetTexture("Interface/WorldMap/UI-QuestPoi-NumberIcons")
+    note.Number:SetTexture("Interface/WorldMap/UI-QuestPoi-NumberIcons")
+    note.Texture:SetTexCoord(0.500, 0.625, 0.375, 0.5)
     note.PushedTexture:SetTexCoord(0.375, 0.500, 0.375, 0.5)
-    note.HighlightTexture:SetTexCoord(0.625, 0.750, 0.375, 0.5)
-    note.Display.Icon:SetTexCoord(QuestPOI_CalculateNumericTexCoords(note.noteIdx, QUEST_POI_COLOR_BLACK ))
-    note.Display.Icon:Show()
+    note.Highlight:SetTexCoord(0.625, 0.750, 0.375, 0.5)
+    note.Number:SetTexCoord(QuestPOI_CalculateNumericTexCoords(note.noteIdx, QUEST_POI_COLOR_BLACK ))
+    note.Number:Show()
     note.tooltipText = text or ""
 
     note:RegisterForClicks("AnyUp")
@@ -1116,11 +1131,11 @@ function MDT:DrawNote(x, y, text, objectIndex)
     end
     note:SetScript("OnClick",function(self,button,down)
         if button == "LeftButton" then
-            L_CloseDropDownMenus()
+            LDD:CloseDropDownMenus()
             self:OpenEditBox()
         elseif button == "RightButton" then
             currentNote = note
-            L_EasyMenu(noteMenu,noteDropDown, "cursor", 0 , -15, "MENU")
+            LDD:EasyMenu(noteMenu,noteDropDown, "cursor", 0 , -15, "MENU")
             if noteEditbox and noteEditbox.frame:IsShown() then
                 noteEditbox.frame:Hide()
             end

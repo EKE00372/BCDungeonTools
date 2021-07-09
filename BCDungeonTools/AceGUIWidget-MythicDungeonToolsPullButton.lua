@@ -1,5 +1,6 @@
 local Type, Version = "MDTPullButton", 1
 local AceGUI = LibStub and LibStub("AceGUI-3.0", true)
+local LDD = LibStub("LibUIDropDownMenu-4.0")
 local MDT = MDT
 local L = MDT.L
 
@@ -195,12 +196,12 @@ local methods = {
                     end
 
                     if #MDT:GetSelection() > 1 then
-                        L_EasyMenu(self.multiselectMenu, MDT.main_frame.sidePanel.optionsDropDown, "cursor", 0 , -15, "MENU")
+                        LDD:EasyMenu(self.multiselectMenu, MDT.main_frame.sidePanel.optionsDropDown, "cursor", 0 , -15, "MENU")
                     else
                         MDT:SetMapSublevel(self.index)
                         MDT:SetSelectionToPull(self.index)
 
-                        L_EasyMenu(self.menu, MDT.main_frame.sidePanel.optionsDropDown, "cursor", 0 , -15, "MENU")
+                        LDD:EasyMenu(self.menu, MDT.main_frame.sidePanel.optionsDropDown, "cursor", 0 , -15, "MENU")
                     end
 
                 else
@@ -399,7 +400,7 @@ local methods = {
             MDT:UpdatePullButtonColor(self.index, r, g, b)
             MDT:DungeonEnemies_UpdateBlipColors(self.index,r,g,b)
             MDT:DrawAllHulls()
-            L_CloseDropDownMenus()
+            LDD:CloseDropDownMenus()
             if MDT.liveSessionActive and MDT:GetCurrentPreset().uid == MDT.livePresetUID then
                 MDT:LiveSession_QueueColorUpdate()
             end
@@ -430,7 +431,7 @@ local methods = {
                 ColorPickerFrame.previousValues = {self.color.r, self.color.g, self.color.b}
                 ColorPickerFrame:Hide() -- Need to run the OnShow
                 ColorPickerFrame:Show()
-                L_CloseDropDownMenus()
+                LDD:CloseDropDownMenus()
             end,
             swatchFunc = swatchFunc,
             cancelFunc = cancelFunc,
@@ -622,7 +623,7 @@ local methods = {
             end
             MDT:DrawAllHulls()
 
-            L_CloseDropDownMenus()
+            LDD:CloseDropDownMenus()
             if MDT.liveSessionActive and MDT:GetCurrentPreset().uid == MDT.livePresetUID then
                 MDT:LiveSession_QueueColorUpdate()
             end
@@ -673,7 +674,7 @@ local methods = {
                 ColorPickerFrame.previousValues = {self.color.r, self.color.g, self.color.b}
                 ColorPickerFrame:Hide() -- Need to run the OnShow
                 ColorPickerFrame:Show()
-                L_CloseDropDownMenus()
+                LDD:CloseDropDownMenus()
             end,
             swatchFunc = swatchMultiFunc,
             cancelFunc = cancelMultiFunc

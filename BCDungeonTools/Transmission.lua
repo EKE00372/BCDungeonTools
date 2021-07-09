@@ -324,13 +324,13 @@ function MDTcommsObject:OnCommReceived(prefix, message, distribution, sender)
                     updateSeasonal = true
                 end
                 db.currentDifficulty = difficulty
-                MDT.main_frame.sidePanel.DifficultySlider:SetValue(difficulty)
+                --MDT.main_frame.sidePanel.DifficultySlider:SetValue(difficulty)
                 MDT:UpdateProgressbar()
                 if MDT.EnemyInfoFrame and MDT.EnemyInfoFrame.frame:IsShown() then MDT:UpdateEnemyInfoData() end
                 MDT:ReloadPullButtons()
                 if updateSeasonal then
-                    MDT:DungeonEnemies_UpdateSeasonalAffix()
-                    MDT.main_frame.sidePanel.difficultyWarning:Toggle(difficulty)
+                    --MDT:DungeonEnemies_UpdateSeasonalAffix()
+                    --MDT.main_frame.sidePanel.difficultyWarning:Toggle(difficulty)
                     MDT:POI_UpdateAll()
                     MDT:KillAllAnimatedLines()
                     MDT:DrawAllAnimatedLines()
@@ -349,23 +349,11 @@ function MDTcommsObject:OnCommReceived(prefix, message, distribution, sender)
                 local teeming = MDT:IsPresetTeeming(preset)
                 preset.value.teeming = teeming
                 if preset == MDT:GetCurrentPreset() then
-                    local affixDropdown = MDT.main_frame.sidePanel.affixDropdown
-                    affixDropdown:SetValue(week)
-                    if not MDT:GetCurrentAffixWeek() then
-                        MDT.main_frame.sidePanel.affixWeekWarning.image:Hide()
-                        MDT.main_frame.sidePanel.affixWeekWarning:SetDisabled(true)
-                    elseif MDT:GetCurrentAffixWeek() == week then
-                        MDT.main_frame.sidePanel.affixWeekWarning.image:Hide()
-                        MDT.main_frame.sidePanel.affixWeekWarning:SetDisabled(true)
-                    else
-                        MDT.main_frame.sidePanel.affixWeekWarning.image:Show()
-                        MDT.main_frame.sidePanel.affixWeekWarning:SetDisabled(false)
-                    end
                     MDT:DungeonEnemies_UpdateTeeming()
                     MDT:DungeonEnemies_UpdateInspiring()
                     MDT:UpdateFreeholdSelector(week)
                     MDT:DungeonEnemies_UpdateBlacktoothEvent(week)
-                    MDT:DungeonEnemies_UpdateSeasonalAffix()
+                    --MDT:DungeonEnemies_UpdateSeasonalAffix()
                     MDT:DungeonEnemies_UpdateBoralusFaction(preset.faction)
                     MDT:POI_UpdateAll()
                     MDT:UpdateProgressbar()
@@ -540,7 +528,7 @@ function MDTcommsObject:OnCommReceived(prefix, message, distribution, sender)
                 preset.mdi.beguiling = data
                 if updateUI then
                     MDT.MDISelector.BeguilingDropDown:SetValue(preset.mdi.beguiling)
-                    MDT:DungeonEnemies_UpdateSeasonalAffix()
+                    --MDT:DungeonEnemies_UpdateSeasonalAffix()
                     MDT:DungeonEnemies_UpdateBoralusFaction(preset.faction)
                     MDT:UpdateProgressbar()
                     MDT:ReloadPullButtons()
